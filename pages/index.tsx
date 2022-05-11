@@ -13,7 +13,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Welcome Mos</h1>
+        <h1 className={styles.title}>반갑습니다.</h1>
 
         <p className={styles.description}>
           Get started by editing{' '}
