@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "docker-build": "docker build --build-arg PROFILE=dev -t next-web -f ./Dockerfile .",
+    "docker-run": "docker run -d --name next-web -p 8080:8080 next-web:latest",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

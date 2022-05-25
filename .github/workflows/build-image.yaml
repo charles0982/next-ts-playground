@@ -1,0 +1,21 @@
+name: Next-Web-Image-Build-Push
+on:
+  push:
+    branches: [develop]
+    tags:
+      - MOS-*.*
+
+env:
+  AWS_REGION: ap-northeast-2
+  MOS_ECR_TAG: 108199670400.dkr.ecr.ap-northeast-2.amazonaws.com/next-web:latest
+jobs:
+  docker-build:
+    runs-on: self-hosted
+    # needs: test
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build image
+        run: |
+          aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 108199670400.dkr.ecr.ap-northeast-2.amazonaws.com
+          docker build . --file Dockerfile --tag ${{ env.MOS_ECR_TAG }} --label "runnumber=${GITHUB_RUN_ID}"
+          docker push ${{ env.MOS_ECR_TAG }}
